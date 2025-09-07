@@ -33,6 +33,7 @@ pub struct FormErrors {
 pub fn market_creator() -> Html {
     let nostr_id = nostr_minions::key_manager::use_nostr_key();
     let relay_ctx = nostr_minions::relay_pool::use_nostr_relay_pool();
+    let navigate = yew_router::hooks::use_navigator().expect("Failed to get navigator");
     let form_data = use_state(FormData::default);
     let errors = use_state(FormErrors::default);
     let loading = use_state(|| false);
@@ -271,6 +272,7 @@ pub fn market_creator() -> Html {
             let _ = relay_ctx.send(wrapper_note_b);
 
             loading.set(false);
+            navigate.push::<crate::components::Route>(&crate::components::Route::Betting);
         })
     };
 

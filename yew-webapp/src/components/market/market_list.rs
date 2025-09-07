@@ -41,9 +41,7 @@ pub fn market_list(props: &MarketListProps) -> Html {
                 markets
                     .iter()
                     .filter(|market| status.is_none() || Some(market.settled) == status)
-                    .filter(|market| {
-                        market.settlement_timestamp > now as u64
-                    })
+                    .filter(|market| market.settlement_timestamp > now as u64)
                     .cloned()
                     .collect::<Vec<markstr_core::PredictionMarket>>()
             };
